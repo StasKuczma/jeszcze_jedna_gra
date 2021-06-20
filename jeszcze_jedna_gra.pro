@@ -4,7 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+        game.cpp \
+        main.cpp \
+        player.cpp
 
 INCLUDEPATH += "D:\SFML-2.5.1\include"
 
@@ -14,3 +16,7 @@ CONFIG(debug, debug|release){
 } else {
     LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
 }
+
+HEADERS += \
+    game.h \
+    player.h
