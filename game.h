@@ -13,12 +13,17 @@ class Game
 {
 private:
     sf::RenderWindow* window;
+    sf::View widok;
     sf::Event ev;
+    sf::Texture tlo;
+    sf::Sprite tloSprite;
 
     Player* player;
 
     void inicjalizujOkno();
     void inicjalizujPlayer();
+    void inicjalizujWidok();
+    void inicjalizujTlo();
 
 public:
     //konstruktory
@@ -32,6 +37,8 @@ public:
     //update gracza
     void upadatePlayer();
     void renderPlayer();
+    void updateKolizji();
+    void updateOkna();
 };
 
 #endif // GAME_H
