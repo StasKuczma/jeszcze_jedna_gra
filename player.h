@@ -13,6 +13,7 @@ class Player
 private:
     sf::Sprite sprite;
     sf::Texture tekstura;
+    sf::RectangleShape ksztalt;
 
     //animacja
     //fizyka
@@ -37,9 +38,12 @@ public:
     virtual ~Player();
 
     const sf::FloatRect getGlobalBounds()const;
+    const sf::Vector2f getPosition()const;
+
 
     void resetujPredkosc();
     void ustawPozycje(const float x,const float y);
+    const sf::RectangleShape getShape()const;
 
     //funkcje
     void update();
@@ -48,6 +52,7 @@ public:
     void updateFizyka();
     void ruch(float dir_x,float dir_y);
     void skok();
+    void wymiary();
 };
 
 #endif // PLAYER_H

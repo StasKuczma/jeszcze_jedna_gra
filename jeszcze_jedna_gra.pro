@@ -6,7 +6,10 @@ CONFIG -= qt
 SOURCES += \
         game.cpp \
         main.cpp \
-        player.cpp
+        mapaplytek.cpp \
+        player.cpp \
+        plytka.cpp \
+        punkty.cpp
 
 INCLUDEPATH += "D:\SFML-2.5.1\include"
 
@@ -19,4 +22,7 @@ CONFIG(debug, debug|release){
 
 HEADERS += \
     game.h \
-    player.h
+    mapaplytek.h \
+    player.h \
+    plytka.h \
+    punkty.h

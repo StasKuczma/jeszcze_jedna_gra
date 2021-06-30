@@ -18,6 +18,11 @@ int main()
 
     Game game;
 
+    sf::RectangleShape rectangle(sf::Vector2f(120.0, 60.0));
+    rectangle.setPosition(500.0, 400.0);
+    rectangle.setFillColor(sf::Color::Red);
+    rectangle.setOrigin(60.0,30.0);
+
     while(game.stanOkna())
     {
         game.update();

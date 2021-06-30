@@ -23,15 +23,16 @@ void Player::inicjakizujtektura()
     {
       std::cout<<"nie mozna byl wczytac pliku dla garacza"<<std::endl;
     }
+    this->sprite.move(270,500);
 
 }
 void Player::inicjlizujFizyke()
 {
-    this->maxPrekosc=10.f;
+    this->maxPrekosc=8.f;
     this->minPrekosc=1.f;
     this->przyspieszenie=3.f;
     this->zwolnienie=0.9f;
-    this->grawitacja=2.f;
+    this->grawitacja=1.9f;
     this->maxPredkoscY=24.f;
 }
 
@@ -93,6 +94,23 @@ void Player::resetujPredkosc()
 {
    this->predkosc.y=0.f;
 }
+
+const sf::Vector2f Player::getPosition()const
+{
+    return this->sprite.getPosition();
+}
+
+const sf::FloatRect Player::getGlobalBounds()const
+{
+    return this->sprite.getGlobalBounds();
+}
+
+const sf::RectangleShape Player::getShape()const
+{
+    return this->ksztalt;
+}
+
+
 void Player::ustawPozycje(float x,float y)
 {
     this->sprite.setPosition(x,y);
@@ -102,12 +120,14 @@ void Player::skok()
 {
     this->moze_skakac=1;
     this->licznik_spacji=0;
+    //std::cout<<"skokkkkk"<<std::endl;
 }
 
 void Player::update()
 {
     this->updateRuch();
     this->updateFizyka();
+    //this->wymiary();
 }
 
 void Player::render(sf::RenderTarget & target)
@@ -115,35 +135,33 @@ void Player::render(sf::RenderTarget & target)
     target.draw(this->sprite);
 }
 
+//void Player::wymiary()
+//{
+//    gora=this->sprite.getGlobalBounds().top;
+//    dol=gora-this->sprite.getGlobalBounds().height;
+//    lewo=this->getGlobalBounds().left;
+//    prawo=lewo-this->getGlobalBounds().width;
+//}
+
 void Player::updateRuch()
 {
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))//lewo
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))//skok
     {
-        this->ruch(-1.f,0.f);
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))//prawo
-    {
-        this->ruch(1.f,0.f);
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))//skok
-    {
-            if(moze_skakac)
+            if(moze_skakac==1)
             {
-            std::cout<<"skok"<<std::endl;
-            this->ruch(0.f,-10.f);
+            //std::cout<<"skok"<<std::endl;
+            this->ruch(0.f,-15.f);
             moze_skakac=0;
             }
     }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))//lewo
+    {
+        this->ruch(-1.f,0.f);
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))//prawo
+    {
+        this->ruch(1.f,0.f);
+    }
 
-
-//    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))//gora
-//    {
-//        this->sprite.move(0.f,-1.f);
-//    }
-//    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))//dol
-//    {
-//        this->sprite.move(0.f,1.f);
-//    }
 }
 

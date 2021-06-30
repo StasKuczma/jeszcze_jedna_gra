@@ -8,6 +8,9 @@
 #include <iostream>
 #include <vector>
 #include "player.h"
+#include "plytka.h"
+#include "mapaplytek.h"
+#include "punkty.h"
 
 class Game
 {
@@ -19,11 +22,20 @@ private:
     sf::Sprite tloSprite;
 
     Player* player;
+    Plytka* plytka;
+    Plytka* plytka2;
+    Plytka* plytka3;
+    MapaPlytek* MapaPlytek;
+    std::vector<sf::RectangleShape> punkty;
+    Punkty* punkt1;
 
     void inicjalizujOkno();
     void inicjalizujPlayer();
     void inicjalizujWidok();
     void inicjalizujTlo();
+    void inicjalizujPlytki();
+    void imicjalizujMape();
+    void inicjalizujPunkty();
 
 public:
     //konstruktory
@@ -34,11 +46,25 @@ public:
 
     void update();
     void render();
+    void kolizja();
     //update gracza
     void upadatePlayer();
     void renderPlayer();
     void updateKolizji();
+    void updateKolizjizOknem();
     void updateOkna();
+    void wymiary();
+
+    //platformy
+    void renderPlytka();
+    void updatePlytka();
+
+    //mapa
+    void renderMapa();
+    void updateMapa();
+    //punkty
+    void updatePunkty();
+    void renderPunkty();
 };
 
 #endif // GAME_H
