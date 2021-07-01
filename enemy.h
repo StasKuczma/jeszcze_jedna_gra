@@ -1,5 +1,5 @@
-#ifndef PUNKTY_H
-#define PUNKTY_H
+#ifndef ENEMY_H
+#define ENEMY_H
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -7,7 +7,8 @@
 #include <iostream>
 #include <vector>
 
-class Punkty
+
+class Enemy
 {
 private:
     sf::Sprite sprite;
@@ -17,16 +18,17 @@ private:
     int polozenieX;
     int polozenieY;
 
-    void inicjalizujPunkty();
+    void inicjalizujEnemy();
     void inicjakizujtekture();
 public:
-    Punkty(int x,int y);
+    Enemy(int x);
     const sf::FloatRect getGlobalBounds() const;
     const sf::Vector2f getPosition() const;
     void render(sf::RenderTarget &target);
-    void updatePunkty1();
-    void polozenie();
+    void goombaRuch();
+    int kierunekRuchu();
+
 
 };
 
-#endif // PUNKTY_H
+#endif // ENEMY_H

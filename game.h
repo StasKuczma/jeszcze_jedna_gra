@@ -7,10 +7,13 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
+#include <string>
+#include <sstream>
 #include "player.h"
 #include "plytka.h"
 #include "mapaplytek.h"
 #include "punkty.h"
+#include "enemy.h"
 
 class Game
 {
@@ -25,9 +28,19 @@ private:
     Plytka* plytka;
     Plytka* plytka2;
     Plytka* plytka3;
+    Plytka* plytka4;
+    Plytka* plytka5;
+    Plytka* plytka6;
+    Plytka* plytka7;
+    Plytka* plytka8;
+    Plytka* plytka9;
     MapaPlytek* MapaPlytek;
     std::vector<sf::RectangleShape> punkty;
     Punkty* punkt1;
+    Punkty* punkt2;
+    Enemy* enemy1;
+    Enemy* enemy2;
+    unsigned points;
 
     void inicjalizujOkno();
     void inicjalizujPlayer();
@@ -36,6 +49,13 @@ private:
     void inicjalizujPlytki();
     void imicjalizujMape();
     void inicjalizujPunkty();
+    void inicjalizujGUI();
+    void inicjalizujEnemy();
+
+    //GUI
+    sf::Font font;
+    sf::Text pointText;
+
 
 public:
     //konstruktory
@@ -52,7 +72,10 @@ public:
     void renderPlayer();
     void updateKolizji();
     void updateKolizjizOknem();
+    void updateKilizjizGoomba();
     void updateOkna();
+    void updateGUI();
+    void renderGUI();
     void wymiary();
 
     //platformy
@@ -63,8 +86,13 @@ public:
     void renderMapa();
     void updateMapa();
     //punkty
+
     void updatePunkty();
     void renderPunkty();
+    void zbieraniePunktow();
+    //enemy
+    void renderEnemy();
+    void updateEnemy();
 };
 
 #endif // GAME_H

@@ -26,6 +26,7 @@ private:
     float maxPredkoscY;
     bool moze_skakac;
     int licznik_spacji;
+    int licznik_punktow;
 
     //ruch
     void inicjalizujsprite();
@@ -53,6 +54,7 @@ public:
     void ruch(float dir_x,float dir_y);
     void skok();
     void wymiary();
+    void plus_jeden();
 };
 
 #endif // PLAYER_H

@@ -6,6 +6,7 @@ Player::Player()
     this->inicjakizujtektura();
     this->inicjalizujsprite();
     this->inicjlizujFizyke();
+    licznik_punktow=0;
 }
 Player::~Player()
 {
@@ -28,11 +29,11 @@ void Player::inicjakizujtektura()
 }
 void Player::inicjlizujFizyke()
 {
-    this->maxPrekosc=8.f;
+    this->maxPrekosc=9.f;
     this->minPrekosc=1.f;
     this->przyspieszenie=3.f;
     this->zwolnienie=0.9f;
-    this->grawitacja=1.9f;
+    this->grawitacja=1.6f;
     this->maxPredkoscY=24.f;
 }
 
@@ -133,6 +134,11 @@ void Player::update()
 void Player::render(sf::RenderTarget & target)
 {
     target.draw(this->sprite);
+}
+
+void Player::plus_jeden()
+{
+    licznik_punktow++;
 }
 
 //void Player::wymiary()

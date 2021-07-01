@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        enemy.cpp \
         game.cpp \
         main.cpp \
         mapaplytek.cpp \
@@ -21,6 +22,7 @@ CONFIG(debug, debug|release){
 }
 
 HEADERS += \
+    enemy.h \
     game.h \
     mapaplytek.h \
     player.h \
