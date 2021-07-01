@@ -7,7 +7,6 @@ SOURCES += \
         enemy.cpp \
         game.cpp \
         main.cpp \
-        mapaplytek.cpp \
         player.cpp \
         plytka.cpp \
         punkty.cpp
@@ -24,7 +23,6 @@ CONFIG(debug, debug|release){
 HEADERS += \
     enemy.h \
     game.h \
-    mapaplytek.h \
     player.h \
     plytka.h \
     punkty.h

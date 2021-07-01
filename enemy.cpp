@@ -5,7 +5,7 @@ Enemy::Enemy(int x)
     this->inicjakizujtekture();
     this->inicjalizujEnemy();
     this->polozenieX=-4.f;
-    this->sprite.setPosition(x,650);
+    this->sprite.setPosition(x,635);
 }
 
 int Enemy::kierunekRuchu()
@@ -18,19 +18,19 @@ void Enemy::inicjalizujEnemy()
 {
 
     this->sprite.setTexture(this->tekstura);
-    //this->sprite.setPosition(600,650);
-    this->sprite.setScale(0.1,0.1);
-    //this->sprite.setPosition(1000.f,650.f);
+    this->sprite.setScale(0.65,0.65);
+
 
 }
 
 void Enemy::inicjakizujtekture()
 {
 
-    if(!this->tekstura.loadFromFile("tekstury/goomba.PNG"))
+    if(!this->tekstura.loadFromFile("tekstury/goomba3.PNG"))
     {
       std::cout<<"nie mozna byl wczytac pliku dla goomba"<<std::endl;
     }
+    tekstura.loadFromFile("tekstury/goomba3.png");
 
 }
 
@@ -53,4 +53,9 @@ void Enemy::goombaRuch()
 void Enemy::render(sf::RenderTarget &target)
 {
     target.draw(this->sprite);
+}
+
+void Enemy::koniec()
+{
+
 }

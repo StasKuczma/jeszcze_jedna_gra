@@ -20,7 +20,6 @@ private:
     void inicjakizujtekture();
 public:
     Plytka(int x,int y);
-    //virtual ~Plytka();
     const sf::FloatRect getGlobalBounds() const;
     const sf::Vector2f getPosition() const;
 

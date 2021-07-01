@@ -27,6 +27,7 @@ public:
     void render(sf::RenderTarget &target);
     void goombaRuch();
     int kierunekRuchu();
+    void koniec();
 
 
 };

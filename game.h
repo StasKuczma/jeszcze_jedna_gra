@@ -11,7 +11,6 @@
 #include <sstream>
 #include "player.h"
 #include "plytka.h"
-#include "mapaplytek.h"
 #include "punkty.h"
 #include "enemy.h"
 
@@ -23,7 +22,7 @@ private:
     sf::Event ev;
     sf::Texture tlo;
     sf::Sprite tloSprite;
-
+    //utworzenie obiektow klas uzytych w tej klasie za pomoca pointera
     Player* player;
     Plytka* plytka;
     Plytka* plytka2;
@@ -34,20 +33,22 @@ private:
     Plytka* plytka7;
     Plytka* plytka8;
     Plytka* plytka9;
-    MapaPlytek* MapaPlytek;
-    std::vector<sf::RectangleShape> punkty;
     Punkty* punkt1;
     Punkty* punkt2;
     Enemy* enemy1;
     Enemy* enemy2;
+    sf::Clock clock;
+    sf::Time time_;
     unsigned points;
+    int czas;
 
+    //funkcje inicjalizujace wywolywane raz
     void inicjalizujOkno();
     void inicjalizujPlayer();
     void inicjalizujWidok();
     void inicjalizujTlo();
     void inicjalizujPlytki();
-    void imicjalizujMape();
+    void inicjalizujCzas();
     void inicjalizujPunkty();
     void inicjalizujGUI();
     void inicjalizujEnemy();
@@ -55,18 +56,18 @@ private:
     //GUI
     sf::Font font;
     sf::Text pointText;
+    sf::Text time;
+    sf::Text koniec;
 
 
 public:
-    //konstruktory
+    //konstruktor
     Game();
     virtual~Game();
+    const bool stanOkna() const;//stala ktora mowi o stanie okna
     //funkcje
-    const bool stanOkna() const;//stała która mówi o stanie okna
-
     void update();
     void render();
-    void kolizja();
     //update gracza
     void upadatePlayer();
     void renderPlayer();
@@ -81,18 +82,17 @@ public:
     //platformy
     void renderPlytka();
     void updatePlytka();
-
-    //mapa
-    void renderMapa();
-    void updateMapa();
     //punkty
-
     void updatePunkty();
     void renderPunkty();
     void zbieraniePunktow();
     //enemy
     void renderEnemy();
     void updateEnemy();
+    //czas
+    void updateTime();
+
+    void koniecGry();
 };
 
 #endif // GAME_H

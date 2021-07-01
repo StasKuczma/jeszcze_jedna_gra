@@ -27,6 +27,7 @@ void Punkty::inicjakizujtekture()
     {
       std::cout<<"nie mozna byl wczytac pliku dla Punktu"<<std::endl;
     }
+    tekstura.loadFromFile("tekstury/Punkt1.jpg");
 
 }
 
@@ -38,7 +39,7 @@ void Punkty::render(sf::RenderTarget &target)
 void Punkty::polozenie()
 {
     this->polozenieX=((rand()%1500)+20);
-    this->polozenieY=((rand()%300)+400);
+    this->polozenieY=((rand()%270)+330);
     this->sprite.setPosition(polozenieX,polozenieY);
 }
 

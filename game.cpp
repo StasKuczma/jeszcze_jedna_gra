@@ -8,11 +8,10 @@ Game::Game()
    this->inicjalizujWidok();
    this->inicjalizujTlo();
    this->inicjalizujPlytki();
-   this->imicjalizujMape();
    this->inicjalizujPunkty();
    this->inicjalizujGUI();
    this->inicjalizujEnemy();
-}
+   this->inicjalizujCzas();}
 
 Game::~Game()
 {
@@ -34,23 +33,13 @@ void Game::inicjalizujPlytki()
     this->plytka7=new Plytka(1100.f,600.f);
     this->plytka8=new Plytka(1350.f,550.f);
     this->plytka9=new Plytka(1500.f,450.f);
-    //this->plytka2->ustaw(100.f,620.f);
 }
 void Game::inicjalizujPunkty()
 {
-
     this->punkt1=new Punkty(350,650);
     this->punkt2=new Punkty(350,650);
     this->points=0;
-
-    //this->punkty.emplace_back(punkt1);
-
 }
-void Game::imicjalizujMape()
-{
-    //this->MapaPlytek=new class MapaPlytek();
-}
-
 
 void Game::inicjalizujGUI()
 {
@@ -60,16 +49,26 @@ void Game::inicjalizujGUI()
     }
     this->pointText.setFont(this->font);
     this->pointText.setCharacterSize(50);
-    this->pointText.setFillColor(sf::Color::White);
-    //this->pointText.setString("test");
+    this->pointText.setFillColor(sf::Color(50,100,250));
+    this->time.setFont(this->font);
+    this->time.setCharacterSize(50);
+    this->time.setFillColor(sf::Color::Red);
+    this->koniec.setFont(this->font);
+    this->koniec.setCharacterSize(50);
+    this->koniec.setFillColor(sf::Color::Red);
 
-    //this->pointText.move(100,500);
+
 }
 
 void Game::inicjalizujEnemy()
 {
     this->enemy1= new Enemy(100);
     this->enemy2= new Enemy(1800);
+}
+
+void Game::inicjalizujCzas()
+{
+    this->czas=124;
 }
 
 void Game::inicjalizujOkno()
@@ -80,7 +79,6 @@ void Game::inicjalizujOkno()
 void Game::inicjalizujWidok()
 {
     this->widok= *new sf::View (sf::Vector2f(0.f,0.f) ,sf::Vector2f(540.f,400.f));
-    //this->window->setView(widok);
     this->widok.setSize(540.f,400.f);
 }
 void Game::inicjalizujTlo()
@@ -102,10 +100,7 @@ const bool Game::stanOkna()const
     return this->window->isOpen();
 }
 
-void Game::kolizja()
-{
 
-}
 void Game::wymiary()
 {
 
@@ -149,7 +144,6 @@ void Game::updateKilizjizGoomba()
 {
     if(this->player->getGlobalBounds().contains(this->enemy1->getPosition()))
     {
-
         this->points=0;
     }
     if(this->player->getGlobalBounds().contains(this->enemy2->getPosition()))
@@ -157,17 +151,12 @@ void Game::updateKilizjizGoomba()
 
         this->points=0;
     }
-
-
-
 }
-
 void Game::updateKolizji()
 {
 
     if(this->player->getGlobalBounds().contains(this->plytka->getPosition().x+20,this->plytka->getPosition().y))
     {
-        std::cout<<"elo"<<std::endl;
         this->player->resetujPredkosc();
         this->player->skok();
         this->player->ustawPozycje(this->player->getGlobalBounds().left,this->plytka->getGlobalBounds().top-this->plytka->getGlobalBounds().height);
@@ -222,10 +211,7 @@ void Game::updateKolizji()
         this->player->skok();
         this->player->ustawPozycje(this->player->getGlobalBounds().left,this->plytka9->getGlobalBounds().top-this->plytka9->getGlobalBounds().height);
     }
-
-
 }
-
 void Game::updateOkna()
 {
     sf::Vector2f temp;
@@ -245,10 +231,7 @@ void Game::updateOkna()
         this->widok.setCenter(temp.x,temp.y-50);
     }
 }
-void Game::updatePunkty()
-{
-    //this->punkt1->updatePunkty1();
-}
+void Game::updatePunkty(){}
 
 void Game::upadatePlayer()
 {
@@ -257,6 +240,7 @@ void Game::upadatePlayer()
 
 void Game::updateEnemy()
 {
+    if(time_.asSeconds()<124.f){
     this->enemy1->goombaRuch();
     this->enemy1->kierunekRuchu();
     this->enemy2->goombaRuch();
@@ -265,7 +249,6 @@ void Game::updateEnemy()
     if(this->enemy1->getGlobalBounds().contains(2100.f,650.f))
     {
         this->enemy1->kierunekRuchu();
-        //std::cout<<this->enemy1->getGlobalBounds().left<<std::endl;
     }
     else if (this->enemy1->getGlobalBounds().contains(0.f,650.f))
     {
@@ -275,21 +258,36 @@ void Game::updateEnemy()
     if(this->enemy2->getGlobalBounds().contains(2100.f,650.f))
     {
         this->enemy2->kierunekRuchu();
-        //std::cout<<this->enemy1->getGlobalBounds().left<<std::endl;
     }
     else if (this->enemy2->getGlobalBounds().contains(0.f,650.f))
     {
         this->enemy2->kierunekRuchu();
     }
-
 }
+}
+void Game::updateTime()
+{
+    this->time_= clock.getElapsedTime();
+}
+//funkcja odpowiadajca za czas i liczenie puktow oraz ich rozmieszczenie na ekranie
 void Game::updateGUI()
 {
     std::stringstream ss;
     ss<<this->points;
     this->pointText.setPosition(widok.getCenter().x-250.f,widok.getCenter().y-200.f);
     this->pointText.setString(ss.str());
-
+    std::stringstream sss;
+    int temp1;
+    temp1=this->czas-this->time_.asSeconds();
+    if(time_.asSeconds()<124.f){
+    sss<<temp1;}
+    else
+    {
+        temp1=0;
+        sss<<temp1;
+    }
+    this->time.setPosition(widok.getCenter().x+180,widok.getCenter().y-200);
+    this->time.setString(sss.str());
 }
 
 void Game::renderPlayer()
@@ -297,19 +295,13 @@ void Game::renderPlayer()
     this->player->render(*window);
 }
 
-void Game::updatePlytka()
-{
-    //this->plytka2->move(-2,0);//czyli tak to dzila xD
-    //this->plytka->move(1,0);
-}
+void Game::updatePlytka(){}
 
 void Game::zbieraniePunktow()
 {
     if((this->player->getGlobalBounds().contains(
                 this->punkt1->getPosition().x+20,this->punkt1->getPosition().y)))
     {
-        //std::cout<<"punkt zebrany"<<std::endl;
-        //this->player->plus_jeden();//dodanie punktu
         this->punkt1->polozenie();//losowa zmiana polozenia punktu
         this->points++;
 
@@ -321,7 +313,6 @@ void Game::zbieraniePunktow()
         this->points++;
     }
 }
-
 void Game::renderPlytka()
 {
     this->plytka->render(*window);
@@ -340,26 +331,16 @@ void Game::renderPunkty()
     this->punkt1->render(*window);
     this->punkt2->render(*window);
 }
-
 void Game::renderGUI()
 {
     this->window->draw(this->pointText);
+    this->window->draw(this->time);
 }
 void Game::renderEnemy()
 {
     this->enemy1->render(*window);
     this->enemy2->render(*window);
 }
-
-void Game::updateMapa()
-{
-    this->MapaPlytek->ruszaj();
-}
-void Game::renderMapa()
-{
-    this->MapaPlytek->render(*window);
-}
-
 
 void Game::update()
 {
@@ -372,34 +353,46 @@ void Game::update()
 
     }
     this->window->setView(widok);
+    this->updateTime();
     this->updateGUI();
+    if(time_.asSeconds()<124.f)
+    {
     this->upadatePlayer();
+    }
     this->updatePlytka();
-    this->updateMapa();
     this->updateOkna();
     this->updateKolizji();
     this->updateKolizjizOknem();
     this->updatePunkty();
     this->updateEnemy();
     this->updateKilizjizGoomba();
-
     this->zbieraniePunktow();
-    //std::cout<<this->player->getGlobalBounds().left<<"    "<<this->player->getGlobalBounds().top<<std::endl;
 }
 
+//funkcja renderu gry
 void Game::render()
 {
     this->window->clear(sf::Color::White);
     this->window->draw(tloSprite);
-
     this->renderPlayer();
     this->renderPlytka();
     this->renderPunkty();
     this->renderGUI();
     this->renderEnemy();
-
-
-    //this->renderMapa();
+    this->koniecGry();
     this->window->display();
 
+}
+//funkcja konczaca gre
+void Game::koniecGry()
+{
+
+    if(time_.asSeconds()>124.f)
+    {
+        std::stringstream ssss;
+        ssss<<"koniec gry";
+        this->koniec.setPosition(widok.getCenter().x-150.f,widok.getCenter().y-50);
+        this->koniec.setString(ssss.str());
+        this->window->draw(this->koniec);
+    }
 }
